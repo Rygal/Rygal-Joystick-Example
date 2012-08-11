@@ -70,16 +70,14 @@ class MainScene extends Scene {
 
 	override public function unload():Void {
 		super.unload();
-
-		// Unregister event listeners here, remove event listeners here.
 	}
 
 	override public function update(time:GameTime):Void {
 		super.update(time);
 
 		if(game.hasDevice(Joystick, 0)) {
-			if(game.getDevice(Joystick, 0).isButtonPressed(11)) {
-				
+			if(game.getDevice(Joystick, 0).isButtonPressed(11)) { // This "11" is A on the Xbox 360 gamepad
+				trace("Button 11 pressed! :D");
 			}
 		}
 	
