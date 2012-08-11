@@ -9,6 +9,7 @@ import org.rygal.graphic.Canvas;
 import org.rygal.Scene;
 import org.rygal.graphic.Color;
 import org.rygal.graphic.Font;
+import org.rygal.graphic.Texture;
 
 import org.rygal.input.Mouse;
 
@@ -31,6 +32,9 @@ class MainScene extends Scene {
 	public var id:Int;
 
 	private var font:Font;
+	private var texture:Texture;
+
+	private var buttons:IntHash<Int>;
 
 	public function new() {
 		super();
@@ -40,12 +44,28 @@ class MainScene extends Scene {
 		super.load(game);
 
 		font = Font.fromAssets("assets/nokiafc22.ttf", 8);
+		texture = Texture.fromAssets("assets/megusta.png");
 		
+		buttons = new IntHash<Int>();
+
+		// register events		
 		game.joystick.addEventListener(JoystickEvent.AXIS_MOVE, onAxisMove);
+		game.joystick.addEventListener(JoystickEvent.BUTTON_DOWN, onButtonDown);
+		game.joystick.addEventListener(JoystickEvent.BUTTON_UP, onButtonUp);
 	}
 
 	public function onAxisMove(e:JoystickEvent) {
+		id = e.id;
 		_x = e.x;
+		_y = e.y;
+	}
+	
+	public function onButtonDown(e:JoystickEvent) {
+		buttons.set(e.id, e.id);
+	}
+	
+	public function onButtonUp(e:JoystickEvent) {
+		buttons.remove(e.id);
 	}
 
 	override public function unload():Void {
@@ -57,13 +77,36 @@ class MainScene extends Scene {
 	override public function update(time:GameTime):Void {
 		super.update(time);
 
+		if(game.hasDevice(Joystick, 0)) {
+			if(game.getDevice(Joystick, 0).isButtonPressed(11)) {
+				
+			}
+		}
+	
 	}
 	
 	override public function draw(screen:Canvas):Void {
 		screen.clear();
 		super.draw(screen);
 
-		screen.drawString(font, "X: " + _x, Color.BLACK, 10, 10);
+		screen.fillRect(0xFF000000, 0, 0, game.width, game.height);
+
+		var posX:Float = (game.width/2 - texture.width/2) + _x * 100;
+		var posY:Float = (game.height/2 - texture.height/2) + _y * 100;
+
+		screen.draw(texture, posX, posY);
+
+		screen.drawString(font, "ID: " + id, Color.WHITE, 10, 10);
+		screen.drawString(font, "X: " + _x, Color.WHITE, 10, 20);
+		screen.drawString(font, "Y: " + _y, Color.WHITE, 10, 30);
+		screen.drawString(font, "Buttons pressed:", Color.WHITE, 10, 50);
+		
+		var i:Int = 60;
+		
+		for(b in buttons) {
+			screen.drawString(font, "Button: " + b, Color.WHITE, 10, i);
+			i += 10;
+		}
 	}
 
 }
