@@ -52,9 +52,16 @@ class MainScene extends Scene {
 		game.joystick.addEventListener(JoystickEvent.AXIS_MOVE, onAxisMove);
 		game.joystick.addEventListener(JoystickEvent.BUTTON_DOWN, onButtonDown);
 		game.joystick.addEventListener(JoystickEvent.BUTTON_UP, onButtonUp);
+		game.joystick.addEventListener(JoystickEvent.HAT_MOVE, onHatMove);
 	}
 
 	public function onAxisMove(e:JoystickEvent) {
+		id = e.id;
+		_x = e.x;
+		_y = e.y;
+	}
+	
+	public function onHatMove(e:JoystickEvent) {
 		id = e.id;
 		_x = e.x;
 		_y = e.y;
