@@ -25,9 +25,10 @@ class RygalJoystickExample extends Sprite {
 	}
 
 	private function init(e) {
-		var game:Game = new Game(stage.stageWidth, stage.stageHeight,
-			1, new MainScene());
-		// Register additional scenes here.
+		var game:Game = Game.create(1);
+		game.registerScene(new MainScene(), "main");
+
+		game.useScene("main");
 
 		stage.addChild(game.getDisplayObject());
 	}
