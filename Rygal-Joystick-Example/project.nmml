@@ -10,7 +10,7 @@
 	<source path="Source" />
 	
 	<haxelib name="nme" />
-	<classpath path="/Users/kasoki/Projects/Rygal" />
+	<classpath path="../../Rygal" />
 	
 	<assets path="Assets" rename="assets" include="*" exclude="nme.svg" />
 	
