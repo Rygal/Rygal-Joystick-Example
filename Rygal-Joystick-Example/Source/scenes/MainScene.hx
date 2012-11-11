@@ -1,5 +1,6 @@
 package scenes;
 
+import nme.Assets;
 import nme.display.Sprite;
 import nme.events.Event;
 import nme.Lib;
@@ -36,6 +37,8 @@ class MainScene extends Scene {
 
 	private var buttons:IntHash<Int>;
 
+	private var radius:Int = 100;
+	
 	public function new() {
 		super();
 	}
@@ -44,7 +47,6 @@ class MainScene extends Scene {
 		super.load(game);
 
 		font = Font.fromAssets("assets/nokiafc22.ttf", 8);
-		texture = Texture.fromAssets("assets/megusta.png");
 		
 		buttons = new IntHash<Int>();
 
@@ -96,11 +98,13 @@ class MainScene extends Scene {
 
 		screen.fillRect(0xFF000000, 0, 0, game.width, game.height);
 
-		var posX:Float = (game.width/2 - texture.width/2) + _x * 100;
-		var posY:Float = (game.height/2 - texture.height/2) + _y * 100;
+		var posX:Float = (game.width/2 - radius/2) + _x * 100;
+		var posY:Float = (game.height/2 - radius/2) + _y * 100;
 
-		screen.draw(texture, posX, posY);
-
+		//screen.draw(texture, posX, posY);
+		screen.fillCircle(Color.GRAY, posX, posY, radius);
+		screen.fillCircle(Color.LIGHT_GRAY, posX, posY, radius * 0.9);
+		
 		screen.drawString(font, "ID: " + id, Color.WHITE, 10, 10);
 		screen.drawString(font, "X: " + _x, Color.WHITE, 10, 20);
 		screen.drawString(font, "Y: " + _y, Color.WHITE, 10, 30);
