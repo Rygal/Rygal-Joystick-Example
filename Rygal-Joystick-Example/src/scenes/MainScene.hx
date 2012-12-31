@@ -36,6 +36,9 @@ class MainScene extends Scene {
 	private var texture:Texture;
 
 	private var buttons:IntHash<Int>;
+	private var axis:IntHash<Float>;
+	
+	private var axisHashSize:Int;
 
 	private var radius:Int = 100;
 	
@@ -49,6 +52,7 @@ class MainScene extends Scene {
 		font = Font.fromAssets("assets/nokiafc22.ttf", 8);
 		
 		buttons = new IntHash<Int>();
+		axis = new IntHash<Float>();
 
 		// register events		
 		game.joystick.addEventListener(JoystickEvent.AXIS_MOVE, onAxisMove);
@@ -61,6 +65,14 @@ class MainScene extends Scene {
 		id = e.id;
 		_x = e.x;
 		_y = e.y;
+		
+		var i:Int = 0;
+		
+		for(axis in e.axis) {
+			this.axis.set(i++, axis);
+		}
+		
+		axisHashSize = i;
 	}
 	
 	public function onHatMove(e:JoystickEvent) {
@@ -108,13 +120,21 @@ class MainScene extends Scene {
 		screen.drawString(font, "ID: " + id, Color.WHITE, 10, 10);
 		screen.drawString(font, "X: " + _x, Color.WHITE, 10, 20);
 		screen.drawString(font, "Y: " + _y, Color.WHITE, 10, 30);
-		screen.drawString(font, "Buttons pressed:", Color.WHITE, 10, 50);
+		screen.drawString(font, "Axis:", Color.WHITE, 10, 50);
 		
 		var i:Int = 60;
+		var counter:Int = 0;
+		
+		for(a in axis) {
+			screen.drawString(font, "Axis [ID: " + counter++ + "]: " + axis.get(counter), Color.WHITE, 10, i += 10);
+		}
+		
+		screen.drawString(font, "Buttons pressed:", Color.WHITE, 10, 60 + (axisHashSize * 10) + 20);
+		
+		var j:Int = 70 + (axisHashSize * 10) + 20;
 		
 		for(b in buttons) {
-			screen.drawString(font, "Button: " + b, Color.WHITE, 10, i);
-			i += 10;
+			screen.drawString(font, "Button: " + b, Color.WHITE, 10, j += 10);
 		}
 	}
 
