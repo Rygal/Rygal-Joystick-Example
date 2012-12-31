@@ -1,1 +1,2 @@
-Export/
+bin/
+*.build

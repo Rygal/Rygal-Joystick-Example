@@ -13,7 +13,7 @@ import org.rygal.Game;
 * @author Christopher Kaster
 */
 
-class RygalJoystickExample extends Sprite {
+class Main extends Sprite {
 
 	public function new() {
 		super();
@@ -25,12 +25,10 @@ class RygalJoystickExample extends Sprite {
 	}
 
 	private function init(e) {
-		var game:Game = Game.create(1);
+		var game:Game = Game.create();
 		game.registerScene(new MainScene(), "main");
 
 		game.useScene("main");
-
-		stage.addChild(game.getDisplayObject());
 	}
 
 	static public function main() {
@@ -38,7 +36,7 @@ class RygalJoystickExample extends Sprite {
 		stage.scaleMode = nme.display.StageScaleMode.NO_SCALE;
 		stage.align = nme.display.StageAlign.TOP_LEFT;
 
-		Lib.current.addChild(new RygalJoystickExample());
+		Lib.current.addChild(new Main());
 	}
 
 }

@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project>
 	
-	<meta title="RygalJoystickExample" package="de.kasoki.joystick" version="1.0.0" company="University of Applied Science Treves" />
-	<app main="RygalJoystickExample" file="RygalJoystickExample" path="Export" />
+	<meta title="RygalJoystickExample" package="de.kasoki.joystick" version="1.0.0" company="Rygal" />
+	<app main="Main" file="Main" path="bin" />
 	
 	<window width="800" height="600" unless="mobile" />
 	<window fps="30" />
 
-	<source path="Source" />
+	<source path="src" />
 	
 	<haxelib name="nme" />
-	<classpath path="../../Rygal" />
+	<haxelib name="rygal" /> <!-- rygal 1.3+ required -->
+
+	<assets path="assets" include="*" exclude="nme.svg" />
 	
-	<assets path="Assets" rename="assets" include="*" exclude="nme.svg" />
-	
-	<icon path="Assets/nme.svg" />
+	<icon path="assets/nme.svg" />
 	
 	<ndll name="std" />
 	<ndll name="regexp" />
